@@ -24,4 +24,4 @@
 
 6. Create/update Kubernetes resources of the **event-consumer serverless function**.
 
-	- kubectl apply -f ./event-emitter/k8s/function.yaml
+	- kubectl apply -f ./event-consumer/k8s/function.yaml
