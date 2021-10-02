@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-reg-ui
+  namespace: advanced
+  labels:
+    app: event-reg-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-reg-ui
+  template:
+    metadata:
+      labels:
+        app: event-reg-ui
+    spec:
+      containers:
+        - name: event-reg-ui
+          image: docker.io/<docker-username>/event-reg-ui:latest
+          imagePullPolicy: Always
+          envFrom:
+          - secretRef:
+              name: app-secret
+          - configMapRef:
+              name: app-config
+          ports:
+            - name: http
+              containerPort: 3000
+          volumeMounts:
+            - name: secret-volume
+              readOnly: true
+              mountPath: "/etc/secret-volume"
+            - name: config-volume
+              readOnly: true
+              mountPath: "/etc/config-volume"
+      volumes:
+        - name: config-volume
+          configMap:
+            name: app-config
+        - name: secret-volume
+          secret:
+            secretName: app-secret

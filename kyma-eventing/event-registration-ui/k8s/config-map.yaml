@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: advanced
+data:
+  EVENT_EMITTER_ENDPOINT: http://event-emitter.advanced.svc.cluster.local

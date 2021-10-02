@@ -1,0 +1,79 @@
+apiVersion: serverless.kyma-project.io/v1alpha1
+kind: Function
+metadata:
+  name: event-consumer
+  namespace: advanced
+  labels:
+    app: event-consumer
+    example: event-consumer
+spec:
+  deps: |-
+    { 
+      "name": "event-consumer",
+      "version": "1.0.0",
+      "dependencies": {
+            "@sendgrid/mail": "^7.4.6"
+      }
+    }
+  maxReplicas: 1
+  minReplicas: 1
+  resources:
+    limits:
+      cpu: 20m
+      memory: 32Mi
+    requests:
+      cpu: 10m
+      memory: 16Mi
+  env:
+    - name: SENDGRID_API_KEY
+      value: "SENDGRID_API_KEY"
+    - name: SENDGRID_SENDER_EMAIL
+      value: "SENDGRID_SENDER_EMAIL"
+  source: |-
+    const sgMail = require("@sendgrid/mail");
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const EMAIL_SUBJECT = "Event Registration Confirmation";
+    const EMAIL_BODY_TEXT = "This is to confirm your registration for the event.";
+
+    const sendEmail = async function(email, subject, text, html) {
+      const msg = {
+        to: email, 
+        from: process.env.SENDGRID_SENDER_EMAIL, 
+        subject: subject,
+        text: text,
+        html: html
+      }
+      return sgMail
+        .send(msg)
+        .then(() => {
+          console.log("Mail sent");
+        }, error => {
+          console.error(error);
+          if (error.response) {
+            console.error(error.response.body)
+          }
+      });
+    }
+
+    module.exports = { 
+      main: async function (event, context) {
+
+        if (event && event.data) {
+          var eventId = event["ce-id"];
+          console.log("eventId:", eventId);
+          console.log("event.data:", JSON.stringify(event.data));
+
+          const EMAIL_BODY_HTML = `Hello ${event.data.firstName},<br><br>Thanks for registering for Tech Event 2021. We are looking forward to seeing you.<br><br>Location: <strong>Montage Kapalua Bay, Hawaii, USA</strong><br>Address: <strong>1 Bay Dr, Lahaina, HI 96761, United States</strong><br>Date and Time: <strong>December 3 to 5, 2021 | 10:00am to 5:00pm</strong><br>Agenda: <strong>Everything about Hyperscalers</strong><br><br>With best regards,<br>The Tech Event Team<br><br><img src='https://images.unsplash.com/photo-1511578314322-379afb476865?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2069&q=80' alt='The Tech Event' class='center' style='height:400px;'>`
+
+          if (event.data.email) {
+            await sendEmail(event.data.email, EMAIL_SUBJECT, EMAIL_BODY_TEXT, EMAIL_BODY_HTML);
+          }
+          
+        }
+
+        res = event.extensions.response;
+        res.status(200);
+        return;
+
+      }
+    }

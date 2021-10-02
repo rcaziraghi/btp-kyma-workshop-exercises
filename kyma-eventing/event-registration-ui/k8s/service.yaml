@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-reg-ui
+  namespace: advanced
+  labels:
+    app: event-reg-ui
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+  selector:
+    app: event-reg-ui
