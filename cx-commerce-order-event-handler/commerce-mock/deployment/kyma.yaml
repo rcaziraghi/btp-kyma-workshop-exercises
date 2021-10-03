@@ -4,6 +4,7 @@ metadata:
   labels:
     app: commerce-mock
   name: commerce-mock
+  namespace: mocks
 spec:
   gateway: kyma-gateway.kyma-system.svc.cluster.local
   service:
