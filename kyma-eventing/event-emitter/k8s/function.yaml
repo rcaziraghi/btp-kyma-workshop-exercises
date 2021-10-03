@@ -27,10 +27,13 @@ spec:
       cpu: 10m
       memory: 16Mi
   env:
-    - name: PUBLISHER_URL
-      value: "http://eventing-event-publisher-proxy.kyma-system/publish"
+    - name: EVENT_TYPE
+      value: "sap.kyma.custom.nonexistingapp.event.registration.v1"
     - name: EVENT_SOURCE
       value: "/advanced/my.kyma/test"
+    - name: PUBLISHER_URL
+      value: "http://eventing-event-publisher-proxy.kyma-system/publish"
+
   source: |-
     const axios = require("axios").default;
     const { HTTP, CloudEvent } = require("cloudevents");
