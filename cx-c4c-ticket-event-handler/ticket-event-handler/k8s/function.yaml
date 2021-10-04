@@ -34,7 +34,7 @@ spec:
     const axios = require("axios").default;
     const sgMail = require("@sendgrid/mail");
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    const COMM_GATEWAY_URL = process.env["SAP_COMMERCE_CLOUD_COMMERCE_WEBSERVICES_F62E73C7_E627_45B1_A888_B515079575B6_GATEWAY_URL"];
+    const COMM_GATEWAY_URL = process.env["ABCD"];
     const CONFIRMATION_SUBJECT = "Order Confirmation";
 
     module.exports = { 
@@ -42,21 +42,18 @@ spec:
 
         console.log('event', event);
 
-        const orderCode = event.data.orderCode
-        console.log("Processing event with orderCode: ", orderCode);
+        const objectID = '00163E063FDC1ED487FD43C39DFD4BBE';
+        console.log("Processing ticket with objectID: ", objectID);
         
-        const response = await getOrderDetails(orderCode);
+        const response = await getServiceRequestParties(objectID);
 
         if (response && response.user) {
           const user = response.user;
           console.log('Name: ', user.name);
           console.log('Email: ', user.uid);
 
-          const orderValue = response.totalPriceWithTax.value;
-          console.log("Received order value of: ", orderValue, " for orderCode: ", orderCode);
-
-          const emailBodyText = `Hello ${user.name}, This is to confirm that your order was placed successfully. You placed an order value of ${orderValue} for order code ${orderCode}. Thanks, The CX Commerce Store Team` 
-          const emailBodyHtml = `Hello ${user.name},<br><br>This is to confirm that your order was placed successfully.<br><br>You placed an order value of <strong>${orderValue}</strong> for order code <strong>${orderCode}</strong>.<br><br>Thanks,<br>The CX Commerce Store Team` 
+          const emailBodyText = `Hello ${user.name}, This is to confirm that your ticket was updated. Thanks, The CX C4C Team` 
+          const emailBodyHtml = `Hello ${user.name},<br><br>This is to confirm that your ticket was updated.<br><br>Thanks,<br>The CX C4C Team` 
 
           await sendEmail(user.uid, CONFIRMATION_SUBJECT, emailBodyText, emailBodyHtml);
         } else {
@@ -66,10 +63,10 @@ spec:
       }
     }
 
-    async function getOrderDetails(orderCode) {
-      const ordersUrl = `${COMM_GATEWAY_URL}/${process.env.SITE}/orders/${orderCode}?fields=FULL`;
-      console.log("Getting ordering details via: %s", ordersUrl, " for orderCode: ", orderCode);
-      const response = await axios.get(ordersUrl);
+    async function getServiceRequestParties(objectID) {
+      const url = `${COMM_GATEWAY_URL}/${process.env.SITE}/parties/${objectID}?fields=FULL`;
+      console.log("Getting parties via: %s", url, " for objectID: ", objectID);
+      const response = await axios.get(url);
       console.log('response: ', JSON.stringify(response.data, null, 2));
       return response.data;
     }
