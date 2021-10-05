@@ -15,6 +15,8 @@
 
 1. Build the docker image of the **event-registration-ui microservice**. 
 
+	- cd kyma-eventing/event-registration-ui
+
 	- docker build . -t `<docker-username>`/event-reg-ui -f ./event-registration-ui/Dockerfile
 
 	> Note: Replace `<docker-username>` with your username

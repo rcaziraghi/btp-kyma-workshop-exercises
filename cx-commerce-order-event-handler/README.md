@@ -15,6 +15,8 @@
 
 1. Build the docker image of the **commerce-mock microservice**. 
 
+	- cd cx-commerce-order-event-handler/commerce-mock
+
 	- docker build . -t `<docker-username>`/commerce-mock -f ./commerce-mock/Dockerfile
 
 	> Note: Replace `<docker-username>` with your username

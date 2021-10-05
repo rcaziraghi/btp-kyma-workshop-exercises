@@ -15,6 +15,8 @@
 
 1. Build the docker image of the **c4c-mock microservice**. 
 
+	- cd cx-c4c-ticket-event-handler/c4c-mock
+
 	- docker build . -t `<docker-username>`/c4c-mock -f ./c4c-mock/Dockerfile
 
 	> Note: Replace `<docker-username>` with your username
