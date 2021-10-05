@@ -17,7 +17,7 @@
 
 	- cd cx-commerce-order-event-handler/commerce-mock
 
-	- docker build . -t `<docker-username>`/commerce-mock -f ./commerce-mock/Dockerfile
+	- docker build . -t `<docker-username>`/commerce-mock -f Dockerfile
 
 	> Note: Replace `<docker-username>` with your username
 

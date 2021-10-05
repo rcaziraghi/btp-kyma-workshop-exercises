@@ -17,7 +17,7 @@
 
 	- cd kyma-eventing/event-registration-ui
 
-	- docker build . -t `<docker-username>`/event-reg-ui -f ./event-registration-ui/Dockerfile
+	- docker build . -t `<docker-username>`/event-reg-ui -f Dockerfile
 
 	> Note: Replace `<docker-username>` with your username
 

@@ -17,7 +17,7 @@
 
 	- cd cx-c4c-ticket-event-handler/c4c-mock
 
-	- docker build . -t `<docker-username>`/c4c-mock -f ./c4c-mock/Dockerfile
+	- docker build . -t `<docker-username>`/c4c-mock -f Dockerfile
 
 	> Note: Replace `<docker-username>` with your username
 
