@@ -88,6 +88,6 @@ spec:
       const ordersUrl = `${COMM_GATEWAY_URL}/${process.env.SITE}/orders/${orderCode}?fields=FULL`;
       console.log("Getting ordering details via: %s", ordersUrl, " for orderCode: ", orderCode);
       const response = await axios.get(ordersUrl);
-      console.log('response: ', JSON.stringify(response.data, null, 2));
+      // console.log('response: ', JSON.stringify(response.data, null, 2));
       return response.data;
     }
