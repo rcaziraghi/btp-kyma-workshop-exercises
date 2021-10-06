@@ -37,6 +37,7 @@
 	- kubectl apply -f ./event-registration-ui/k8s/secret.yaml
 	- kubectl apply -f ./event-registration-ui/k8s/deployment.yaml
 	- kubectl apply -f ./event-registration-ui/k8s/service.yaml
+	- kubectl apply -f ./event-registration-ui/k8s/apirule.yaml
 
 5. Update the values of the `SENDGRID_API_KEY` & `SENDGRID_SENDER_EMAIL` environment variables in the  ./event-consumer/k8s/function.yaml file, which can be got from your SendGrid account.
 
