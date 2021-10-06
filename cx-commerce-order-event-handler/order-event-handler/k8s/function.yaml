@@ -60,8 +60,6 @@ spec:
     module.exports = { 
       main: async function (event, context) {
 
-        console.log('event', event);
-
         const orderCode = event.data.orderCode
         console.log("Processing event with orderCode: ", orderCode);
         
