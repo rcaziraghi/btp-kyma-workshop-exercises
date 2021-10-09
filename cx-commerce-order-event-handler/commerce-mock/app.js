@@ -22,8 +22,6 @@ var runAsync = async () => {
     app.use(await server.init(configuration))
     app.use(await odata.init(configuration))
     app.use(await openapi.init(configuration))
-    
-    
     if (port)
       app.listen(port, function () {
         console.info("Started application on port %d", port)
@@ -37,7 +35,8 @@ var runAsync = async () => {
 function customizeMock(app) {
   app.get('/rest/v2/:baseSiteId/orders/:code', function (req, res, next) {
     // Customize the response body
-    res.body = orders[req.params.code] || { orderId: req.params.code, totalPriceWithTax: { value: 100 }
+    res.body = orders[req.params.code] || {
+      orderId: req.params.code, totalPriceWithTax: { value: 100 }
     };
 
     // Let the Mock middleware apply usual chain

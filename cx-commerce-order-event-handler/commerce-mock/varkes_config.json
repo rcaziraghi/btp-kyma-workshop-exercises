@@ -1,7 +1,7 @@
 {
     "application": "SAP Commerce Cloud",
-    "provider": "SAP",
     "logo": "logo.svg",
+    "provider": "SAP",
     "package": "SAP Commerce Cloud",
     "events": [
         {

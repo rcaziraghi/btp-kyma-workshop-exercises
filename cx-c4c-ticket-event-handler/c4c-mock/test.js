@@ -4,27 +4,38 @@
 const request = require('supertest');
 const mock = require("./app.js")
 
-describe('tests odata controllers', function () {
+describe('test app', function () {
     it('should work', function (done) {
         this.timeout(20000);
         mock.then(function (app) {
 
-            describe('GET AnswerAttachments via API', function () {
+            describe('GET ServiceRequests via ODATA', function () {
                 it('should return 200', function (done) {
                     request(app)
-                        .get('/api/sap/c4c/odata/v1/c4codataapi/AnswerAttachments')
+                        .get('/sap/c4c/odata/v1/c4codataapi/ServiceRequests')
                         .set('Accept', 'application/json')
                         .expect(200)
                         .expect('Content-Type', 'application/json; charset=utf-8', done)
                 });
             });
-            describe('GET AnswerAttachments via ODATA', function () {
+            describe('GET ServiceRequests via ODATA', function () {
                 it('should return 200', function (done) {
                     request(app)
-                        .get('/sap/c4c/odata/v1/c4codataapi/AnswerAttachments')
+                        .get('/sap/c4c/odata/v1/c4codataapi/ServiceRequestPartys')
                         .set('Accept', 'application/json')
                         .expect(200)
-                        .expect('Content-Type', 'application/json; charset=utf-8', done)
+                        .expect('Content-Type', 'application/json; charset=utf-8')
+                        .expect(/\{"d":\{"results":\[]\}\}/, done)
+                });
+            });
+            describe('GET ServiceRequestPartys via ODATA', function () {
+                it('should return 200', function (done) {
+                    request(app)
+                        .get('/sap/c4c/odata/v1/c4codataapi/ServiceRequestPartys')
+                        .set('Accept', 'application/json')
+                        .expect(200)
+                        .expect('Content-Type', 'application/json; charset=utf-8')
+                        .expect(/\{"d":\{"results":\[]\}\}/, done)
                 });
             });
             describe('GET odata metadata', function () {

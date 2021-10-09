@@ -1,0 +1,33 @@
+{
+    "00163E063FDC1ED487FD43C39DFD4BBE": [
+        {
+            "__metadata": {
+                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestPartyCollection('00163E063FDC1ED487FD4FBCF7F8EBC9')",
+                "type": "c4codata.ServiceRequestParty",
+                "etag": "W/\"datetimeoffset'2019-01-14T04%3A53%3A49.1686480Z'\""
+            },
+            "ObjectID": "00163E063FDC1ED487FD4FBCF7F8EBC9",
+            "ParentObjectID": "00163E063FDC1ED487FD43C39DFD4BBE",
+            "ETag": "/Date(1547441629168)/",
+            "PartyID": "1000248",
+            "PartyUUID": "00163E03-A070-1ED2-8B9D-B004EAA1901D",
+            "RoleCategoryCode": "214",
+            "RoleCategoryCodeText": "Reporter Party",
+            "RoleCode": "214",
+            "RoleCodeText": "Reporter",
+            "Main": true,
+            "DeterminationMethodCode": "5",
+            "DeterminationMethodCodeText": "Copied Automatically from a Party with a Different Party Role Category",
+            "PartyName": "Fernando Salgueiro",
+            "Phone": "+55 5130811100",
+            "Mobile": "+55 5191899100",
+            "Email": "Fernando.Salgueiro.ondemand@maildrop.cc",
+            "EntityLastChangedOn": "/Date(1547441629168)/",
+            "ServiceRequest": {
+                "__deferred": {
+                    "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestPartyCollection('00163E063FDC1ED487FD4FBCF7F8EBC9')/ServiceRequest"
+                }
+            }
+        }
+    ]
+}
