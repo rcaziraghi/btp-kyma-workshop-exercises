@@ -57,8 +57,7 @@ function customizeMock(app) {
 }
 
 function isSpecifcServiceRequest(encodedFilter) {
-  const filter = JSON.parse(decodeURI(encodedFilter));
-  console.log('filter: ', filter);
+  const filter = decodeFilter(encodedFilter);
   if (filter.where && filter.where.ObjectID && filter.where.ObjectID === MOCK_OBJECT_ID) {
     return true;
   }
@@ -66,8 +65,7 @@ function isSpecifcServiceRequest(encodedFilter) {
 }
 
 function isSpecifcReporterParty(encodedFilter) {
-  const filter = JSON.parse(decodeURI(encodedFilter));
-  console.log('filter: ', filter);
+  const filter = decodeFilter(encodedFilter);
   if (filter.where && filter.where.and) {
     const condition1 = filter.where.and.find(element => element.ParentObjectID === MOCK_OBJECT_ID);
     const condition2 = filter.where.and.find(element => element.RoleCategoryCodeText === REPORTER_PARTY);
@@ -78,4 +76,17 @@ function isSpecifcReporterParty(encodedFilter) {
   return false;
 }
 
-module.exports = runAsync()
+function decodeFilter(encodedFilter) {
+  try {
+    const filter = JSON.parse(decodeURI(encodedFilter));
+    if (filter) {
+      console.log('filter: ', JSON.stringify(filter));
+    }
+    return filter;
+  }
+  catch (err) {
+    return undefined;
+  }
+}
+
+module.exports = runAsync();

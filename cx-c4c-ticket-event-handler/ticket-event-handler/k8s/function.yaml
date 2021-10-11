@@ -34,34 +34,14 @@ spec:
     const axios = require("axios").default;
     const sgMail = require("@sendgrid/mail");
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    const C4C_GATEWAY_URL = process.env["SAP_CLOUD_FOR_CUSTOMER_TICKET_API_4D1F7537_865E_4020_A71D_B089FA76CD64_GATEWAY_URL"];
+    const C4C_GATEWAY_URL = process.env["SAP_CLOUD_FOR_CUSTOMER_TICKET_API_5FBF7B9A_1E4D_472C_B1A1_1DCE562AED58_GATEWAY_URL"];
     const CONFIRMATION_SUBJECT = "Ticket Creation Confirmation";
-
-    const sendEmail = async function(email, subject, text, html) {
-      const msg = {
-        to: email, 
-        from: process.env.SENDGRID_SENDER_EMAIL, 
-        subject: subject,
-        text: text,
-        html: html
-      }
-      return sgMail
-        .send(msg)
-        .then(() => {
-          console.log("Mail sent");
-        }, error => {
-          console.error(error);
-          if (error.response) {
-            console.error(error.response.body)
-          }
-      });
-    }
 
     module.exports = { 
       main: async function (event, context) {
         if (event.data && event.data["entity-id"] && event.data["entity-id"]["entity-id"]) {
           const objectID = event.data["entity-id"]["entity-id"];
-          console.log("Processing ticket with ObjectID: ", objectID);
+          console.log("Processing ticket with ObjectID: ", objectID); 
           const serviceRequestResponse = await getMockServiceRequest(objectID);
           if (serviceRequestResponse.d.results && serviceRequestResponse.d.results.ID)  {
             const serviceRequestID = serviceRequestResponse.d.results.ID;
@@ -95,7 +75,7 @@ spec:
           filter: encodeURI(JSON.stringify(filter))
         }
       });
-      console.log('response: ', JSON.stringify(response.data, null, 2));
+      //console.log('response: ', JSON.stringify(response.data, null, 2));
       return response.data;
     }
 
@@ -108,6 +88,26 @@ spec:
           filter: encodeURI(JSON.stringify(filter))
         }
       });
-      console.log('response: ', JSON.stringify(response.data, null, 2));
+      //console.log('response: ', JSON.stringify(response.data, null, 2));
       return response.data;
+    }
+
+    async function sendEmail(email, subject, text, html) {
+      const msg = {
+        to: email, 
+        from: process.env.SENDGRID_SENDER_EMAIL, 
+        subject: subject,
+        text: text,
+        html: html
+      }
+      return sgMail
+        .send(msg)
+        .then(() => {
+          console.log("Mail sent");
+        }, error => {
+          console.error(error);
+          if (error.response) {
+            console.error(error.response.body)
+          }
+      });
     }
