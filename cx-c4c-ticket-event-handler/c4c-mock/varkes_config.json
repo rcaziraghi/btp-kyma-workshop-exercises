@@ -15,7 +15,7 @@
             "specification": "apis/ticket.edmx",
             "basepath": "/sap/c4c/odata/v1/c4codataapi",
             "auth": "basic",
-            "csrf": true,
+            "csrf": false,
             "registerBasepath": true
         }
     ]
