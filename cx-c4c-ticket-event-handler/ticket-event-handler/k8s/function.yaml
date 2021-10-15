@@ -30,6 +30,8 @@ spec:
       value: "SENDGRID_API_KEY"
     - name: SENDGRID_SENDER_EMAIL
       value: "SENDGRID_SENDER_EMAIL"
+    - name: SAP_C4C_API_KEY
+      value: "SAP_C4C_API_KEY"
   source: |-
     const axios = require("axios").default;
     const sgMail = require("@sendgrid/mail");
@@ -37,20 +39,33 @@ spec:
     const C4C_GATEWAY_URL = process.env["SAP_CLOUD_FOR_CUSTOMER_TICKET_API_5FBF7B9A_1E4D_472C_B1A1_1DCE562AED58_GATEWAY_URL"];
     const CONFIRMATION_SUBJECT = "Ticket Creation Confirmation";
 
+    // Interceptor to log the request
+    axios.interceptors.request.use(request => {
+      console.log('Request: ', JSON.stringify(request, null, 2))
+      return request
+    })
+
+    // Interceptor to log the response
+    axios.interceptors.response.use(response => {
+      console.log('Response: ', response);
+      return response
+    })
+
     module.exports = { 
       main: async function (event, context) {
         if (event.data && event.data["entity-id"] && event.data["entity-id"]["entity-id"]) {
           const objectID = event.data["entity-id"]["entity-id"];
-          console.log("Processing ticket with ObjectID: ", objectID); 
+          console.log(`Processing ticket with ObjectID: ${objectID}`);
           const serviceRequestResponse = await getMockServiceRequest(objectID);
-          if (serviceRequestResponse.d.results && serviceRequestResponse.d.results.ID)  {
-            const serviceRequestID = serviceRequestResponse.d.results.ID;
+          // const serviceRequestResponse = await getServiceRequest(objectID);
+          if (serviceRequestResponse && serviceRequestResponse.data && serviceRequestResponse.data.d.results && serviceRequestResponse.data.d.results.length !== 0 && serviceRequestResponse.data.d.results[0].ID)  {
+            const serviceRequestID = serviceRequestResponse.data.d.results[0].ID;
             const reporterPartyresponse = await getMockReporterParty(objectID);
-            if (reporterPartyresponse.d.results && reporterPartyresponse.d.results.length !== 0 && reporterPartyresponse.d.results[0].PartyName && reporterPartyresponse.d.results[0].Email)  {
-              const name = reporterPartyresponse.d.results[0].PartyName;
-              console.log('Name: ', name);
-              const email = reporterPartyresponse.d.results[0].Email;
-              console.log('Email: ', email);
+            // const reporterPartyresponse = await getReporterParty(objectID);
+            if (reporterPartyresponse && reporterPartyresponse.data && reporterPartyresponse.data.d.results && reporterPartyresponse.data.d.results.length !== 0 && reporterPartyresponse.data.d.results[0].PartyName && reporterPartyresponse.data.d.results[0].Email)  {
+              const name = reporterPartyresponse.data.d.results[0].PartyName;
+              const email = reporterPartyresponse.data.d.results[0].Email;
+              console.log(`Name: ${name}; Email: ${email}`);
               const emailBodyText = `Hello ${name}, This is to confirm that your ticket was created. Thanks, The CX C4C Team` 
               const emailBodyHtml = `Hello ${name},<br><br>This is to confirm that your ticket with ID ${serviceRequestID} was created.<br><br>Thanks,<br>The CX C4C Team` 
               await sendEmail(email, CONFIRMATION_SUBJECT, emailBodyText, emailBodyHtml);
@@ -66,30 +81,90 @@ spec:
       }
     }
 
+    // Mock API call
     async function getMockServiceRequest(objectID) {
-      const url = `${C4C_GATEWAY_URL}/ServiceRequests`;
-      console.log("Getting ServiceRequest via: %s", url, " for objectID: ", objectID);
-      const filter = {"where":{"ObjectID":objectID}};
-      const response = await axios.get(url, {
-        params: {
-          filter: encodeURI(JSON.stringify(filter))
-        }
-      });
-      //console.log('response: ', JSON.stringify(response.data, null, 2));
-      return response.data;
+      let response = null;
+      try {
+        const url = `${C4C_GATEWAY_URL}/ServiceRequests`;
+        const filter = {"where":{"ObjectID":objectID}};
+        response = await axios.get(url, {
+          params: {
+            filter: encodeURI(JSON.stringify(filter))
+          }
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        return response;
+      } 
     }
 
+    // Actual API call
+    async function getServiceRequest(objectID) {
+      let response = null;
+      try {
+        const url = 'https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection';
+        const config = {
+          timeout: 20000,
+          headers: {
+            'APIKey': process.env.SAP_C4C_API_KEY,
+            'DataServiceVersion': '2.0',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          params: {
+            $filter: `ObjectID eq '${objectID}'`
+          }
+        };
+        response = await axios.get(url, config);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        return response;
+      }  
+    }
+
+    // Mock API call
     async function getMockReporterParty(objectID) {
-      const url = `${C4C_GATEWAY_URL}/ServiceRequestPartys`;
-      console.log("Getting reporter party via: %s", url, " for objectID: ", objectID);
-      const filter = {"where":{"and":[{"ParentObjectID":objectID},{"RoleCategoryCodeText":"Reporter Party"}]}};
-      const response = await axios.get(url, {
-        params: {
-          filter: encodeURI(JSON.stringify(filter))
-        }
-      });
-      //console.log('response: ', JSON.stringify(response.data, null, 2));
-      return response.data;
+      let response = null;
+      try {
+        const url = `${C4C_GATEWAY_URL}/ServiceRequestPartys`;
+        const filter = {"where":{"and":[{"ParentObjectID":objectID},{"RoleCategoryCodeText":"Reporter Party"}]}};
+        response = await axios.get(url, {
+          params: {
+            filter: encodeURI(JSON.stringify(filter))
+          }
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        return response;
+      }
+    }
+
+    // Actual API call
+    async function getReporterParty(objectID) {
+      let response = null;
+      try {
+        const url = `https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('${objectID}')/ServiceRequestParty`;
+        const config = {
+          timeout: 20000,
+          headers: {
+            'APIKey': process.env.SAP_C4C_API_KEY,
+            'DataServiceVersion': '2.0',
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          params: {
+            $filter: `RoleCategoryCodeText eq 'Reporter Party'`
+          }
+        };
+        response = await axios.get(url, config);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        return response;
+      } 
     }
 
     async function sendEmail(email, subject, text, html) {

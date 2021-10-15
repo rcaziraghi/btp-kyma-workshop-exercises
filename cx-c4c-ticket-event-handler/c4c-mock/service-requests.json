@@ -1,229 +1,231 @@
 {
-    "00163E063FDC1ED487FD43C39DFD4BBE": {
-        "__metadata": {
-            "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')",
-            "type": "c4codata.ServiceRequest",
-            "etag": "W/\"datetimeoffset'2019-01-14T04%3A53%3A49.1686480Z'\""
-        },
-        "ObjectID": "00163E063FDC1ED487FD43C39DFD4BBE",
-        "ProductRecipientPartyID": "000000000000000000000000000000000000000000000000000000010163",
-        "ProductRecipientPartyUUID": "00163E03-A070-1ED2-8B9D-AFEA1D26B01D",
-        "ProductRecipientPartyName": "Antojos Leon",
-        "IncidentServiceIssueCategoryID": "",
-        "ID": "5021",
-        "UUID": "00163E06-3FDC-1ED4-87FD-43C39DFD4BBE",
-        "ProcessingTypeCode": "SRRQ",
-        "ProcessingTypeCodeText": "Service Request",
-        "Name": "Mobile issue",
-        "DataOriginTypeCode": "1",
-        "DataOriginTypeCodeText": "Manual data entry",
-        "EscalationStatusCode": "1",
-        "EscalationStatusCodeText": "Not Escalated",
-        "SerialID": "",
-        "ProductID": "P140100",
-        "ServicePriorityCode": "3",
-        "ServicePriorityCodeText": "Normal",
-        "ServiceRequestUserLifeCycleStatusCode": "5",
-        "ServiceRequestUserLifeCycleStatusCodeText": "Completed",
-        "RequestedFulfillmentPeriodStartDateTime": "2014-08-11T00:00:00Z",
-        "RequestedFulfillmentPeriodEndDateTime": "2014-08-12T00:00:00Z",
-        "RequestedTotalProcessingDuration": "PT139836499S",
-        "RequestedTotalRequestorDuration": "",
-        "RequestInitialReceiptdatetimecontent": "2014-08-09T17:25:29Z",
-        "RequestInProcessdatetimeContent": "2019-01-14T04:53:48Z",
-        "RequestCloseddatetimeContent": "",
-        "RequestFinisheddatetimeContent": "2019-01-14T04:53:48Z",
-        "FirstReactionDuedatetimeContent": "2014-08-09T20:25:29Z",
-        "CompleteDuedatetimeContent": "2014-08-12T17:25:29Z",
-        "WarrantyStartdatetimeContent": "",
-        "SalesOrganisationID": "",
-        "DivisionCode": "",
-        "DivisionCodeText": "",
-        "DistributionChannelCode": "",
-        "DistributionChannelCodeText": "",
-        "SalesUnitPartyID": "",
-        "ServiceExecutionTeamPartyID": "",
-        "ServiceSupportTeamPartyID": "",
-        "ServicePerformerPartyID": "",
-        "ProcessorPartyID": "",
-        "BuyerPartyID": "10163",
-        "BuyerMainContactPartyID": "1000248",
-        "ReportedForPartyID": "",
-        "InstallationPointID": "",
-        "InstalledBaseID": "",
-        "InstallationPointUUID": null,
-        "WarrantyGoodwillCode": "",
-        "WarrantyGoodwillCodeText": "",
-        "EscalationTimePointDateTime": "",
-        "OnSiteArrivalDueDateTime": "",
-        "OnSiteArrivalDateTime": "",
-        "ServiceSupportTeamPartyName": "",
-        "ResolutionDueDateTime": "",
-        "ResolvedOnDateTime": "2019-01-14T04:53:48Z",
-        "SalesTerritoryID": "",
-        "ResolutionDuetimeZoneCode": "",
-        "ResolutionDuetimeZoneCodeText": "",
-        "EscalationTimePointtimeZoneCode": "",
-        "EscalationTimePointtimeZoneCodeText": "",
-        "OnSiteArrivalDuetimeZoneCode": "",
-        "OnSiteArrivalDuetimeZoneCodeText": "",
-        "RequestInProcessdatetimeZoneCode": "CST",
-        "RequestInProcessdatetimeZoneCodeText": "Central Time (Dallas)",
-        "WarrantyStartdatetimeZoneCode": "",
-        "WarrantyStartdatetimeZoneCodeText": "",
-        "RequestCloseddatetimeZoneCode": "",
-        "RequestCloseddatetimeZoneCodeText": "",
-        "RequestedFulfillmentPeriodStarttimeZoneCode": "UTC",
-        "RequestedFulfillmentPeriodStarttimeZoneCodeText": "UTC+0",
-        "RequestedFulfillmentPeriodEndtimeZoneCode": "UTC",
-        "RequestedFulfillmentPeriodEndtimeZoneCodeText": "UTC+0",
-        "RequestFinisheddatetimeZoneCode": "CST",
-        "RequestFinisheddatetimeZoneCodeText": "Central Time (Dallas)",
-        "FirstReactionDuedatetimeZoneCode": "UTC",
-        "FirstReactionDuedatetimeZoneCodeText": "UTC+0",
-        "ResolvedOntimeZoneCode": "CST",
-        "ResolvedOntimeZoneCodeText": "Central Time (Dallas)",
-        "CompleteDuedatetimeZoneCode": "UTC",
-        "CompleteDuedatetimeZoneCodeText": "UTC+0",
-        "RequestInitialReceiptdatetimeZoneCode": "UTC",
-        "RequestInitialReceiptdatetimeZoneCodeText": "UTC+0",
-        "OnSiteArrivaltimeZoneCode": "",
-        "OnSiteArrivaltimeZoneCodeText": "",
-        "SalesUnitPartyName": "",
-        "ServiceExecutionTeamPartyName": "",
-        "ServicePerformerPartyName": "",
-        "ProcessorPartyName": "",
-        "BuyerPartyName": "Antojos Leon",
-        "BuyerMainContactPartyName": "Fernando Salgueiro",
-        "ReportedForPartyName": "",
-        "ProductDescription": "GS Marengo Womens Mountain Bike",
-        "InstallationPointDescription": "",
-        "InstalledBaseDescription": "",
-        "ServiceTermsServiceIssueName": "",
-        "SalesTerritoryName": "",
-        "BuyerPartyUUID": "00163E03-A070-1ED2-8B9D-AFEA1D26B01D",
-        "ReportedForPartyUUID": null,
-        "BuyerMainContactPartyUUID": "00163E03-A070-1ED2-8B9D-B004EAA1901D",
-        "ProcessorPartyUUID": null,
-        "ServicePerformerPartyUUID": null,
-        "ServiceSupportTeamPartyUUID": null,
-        "ServiceExecutionTeamPartyUUID": null,
-        "SalesUnitPartyUUID": null,
-        "InstalledBaseUUID": null,
-        "WarrantyUUID": null,
-        "SalesTerritoryUUID": null,
-        "WarrantyID": "",
-        "ObjectServiceIssueCategoryID": "",
-        "CauseServiceIssueCategoryID": "",
-        "ActivityServiceIssueCategoryID": "",
-        "MainTicketID": "",
-        "ContractID": "",
-        "ReportedPartyID": "1000248",
-        "ReportedPartyUUID": "00163E03-A070-1ED2-8B9D-B004EAA1901D",
-        "ServiceIssueCategoryID": "",
-        "ServiceRequestClassificationCode": "3",
-        "ServiceRequestClassificationCodeText": "Not Relevant",
-        "CreationDateTime": "/Date(1407605338658)/",
-        "PartnerContactPartyID": "",
-        "PartnerContactPartyUUID": null,
-        "ReportedPartyName": "Fernando Salgueiro",
-        "ChangedByCustomerIndicator": false,
-        "ResponseByProcessorDateTimeContent": "",
-        "ResponseByProcessorDateTimeZoneCode": "",
-        "ResponseByProcessorDateTimeZoneCodeText": "",
-        "ResponseByProcessorDueDateTime": "",
-        "ResponseByProcessorDueDateTimeZoneCode": "UTC",
-        "ResponseByProcessorDueDateTimeZoneCodeText": "UTC+0",
-        "ServiceLevelObjectiveID": "CLOUDFORSERVICE_STANDARD",
-        "ServiceLevelObjectiveName": "Standard Service Level",
-        "ServiceLevelObjectiveNamelanguageCode": "EN",
-        "ServiceLevelObjectiveNamelanguageCodeText": "English",
-        "ResponseByRequesterDateTimeContent": "",
-        "ResponseByRequesterDateTimeZoneCode": "",
-        "ResponseByRequesterDateTimeZoneCodeText": "",
-        "InstallationPointIDV1": "",
-        "LastChangeDateTime": "/Date(1547441629168)/",
-        "CreationIdentityUUID": "00163E03-A070-1EE2-88BA-39EF6D09D0B5",
-        "LastChangeIdentityUUID": "00163E0C-84E2-1ED7-80DF-E5C3286E25C7",
-        "SolutionCategoryName": "",
-        "CauseCategoryName": "",
-        "ObjectCategoryName": "",
-        "IncidentCategoryName": "",
-        "CreatedBy": "Michael Johnes",
-        "LastChangedBy": "Steven Gary",
-        "WarrantyFrom": null,
-        "WarrantyTo": null,
-        "ServiceRequestLifeCycleStatusCode": "3",
-        "ServiceRequestLifeCycleStatusCodeText": "Completed",
-        "RequestAssignmentStatusCode": "2",
-        "RequestAssignmentStatusCodeText": "Requestor Action",
-        "DocumentLanguageCode": "",
-        "DocumentLanguageCodeText": "",
-        "EntityLastChangedOn": "/Date(1547441629168)/",
-        "ETag": "/Date(1547441629168)/",
-        "SalesOrderID": "",
-        "SalesOrderUUID": null,
-        "SalesOrderItemUUID": null,
-        "MaintenancePlanUUID": null,
-        "MaintenancePlanID": "",
-        "MaintenancePlanName": "",
-        "RegisteredPrd": "",
-        "dataloader2_KUT": "",
-        "externalCustomerID": "",
-        "ServiceRequestAttachmentFolder": {
-            "__deferred": {
-                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestAttachmentFolder"
-            }
-        },
-        "ServiceRequestBusinessTransactionDocumentReference": {
-            "__deferred": {
-                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestBusinessTransactionDocumentReference"
-            }
-        },
-        "ServiceRequestHistoricalVersion": {
-            "__deferred": {
-                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestHistoricalVersion"
-            }
-        },
-        "ServiceRequestItem": {
-            "__deferred": {
-                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestItem"
-            }
-        },
-        "ServiceRequestOtherParty": {
-            "__deferred": {
-                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestOtherParty"
-            }
-        },
-        "ServiceRequestParty": {
-            "__deferred": {
-                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestParty"
-            }
-        },
-        "ServiceRequestServicePointLocation": {
-            "__deferred": {
-                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestServicePointLocation"
-            }
-        },
-        "ServiceRequestServiceReferenceObject": {
-            "__deferred": {
-                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestServiceReferenceObject"
-            }
-        },
-        "ServiceRequestSkillsCollection": {
-            "__deferred": {
-                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestSkillsCollection"
-            }
-        },
-        "ServiceRequestSolutionProposal": {
-            "__deferred": {
-                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestSolutionProposal"
-            }
-        },
-        "ServiceRequestTextCollection": {
-            "__deferred": {
-                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestTextCollection"
+    "00163E063FDC1ED487FD43C39DFD4BBE": [
+        {
+            "__metadata": {
+                "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')",
+                "type": "c4codata.ServiceRequest",
+                "etag": "W/\"datetimeoffset'2019-01-14T04%3A53%3A49.1686480Z'\""
+            },
+            "ObjectID": "00163E063FDC1ED487FD43C39DFD4BBE",
+            "ProductRecipientPartyID": "000000000000000000000000000000000000000000000000000000010163",
+            "ProductRecipientPartyUUID": "00163E03-A070-1ED2-8B9D-AFEA1D26B01D",
+            "ProductRecipientPartyName": "Antojos Leon",
+            "IncidentServiceIssueCategoryID": "",
+            "ID": "5021",
+            "UUID": "00163E06-3FDC-1ED4-87FD-43C39DFD4BBE",
+            "ProcessingTypeCode": "SRRQ",
+            "ProcessingTypeCodeText": "Service Request",
+            "Name": "Mobile issue",
+            "DataOriginTypeCode": "1",
+            "DataOriginTypeCodeText": "Manual data entry",
+            "EscalationStatusCode": "1",
+            "EscalationStatusCodeText": "Not Escalated",
+            "SerialID": "",
+            "ProductID": "P140100",
+            "ServicePriorityCode": "3",
+            "ServicePriorityCodeText": "Normal",
+            "ServiceRequestUserLifeCycleStatusCode": "5",
+            "ServiceRequestUserLifeCycleStatusCodeText": "Completed",
+            "RequestedFulfillmentPeriodStartDateTime": "2014-08-11T00:00:00Z",
+            "RequestedFulfillmentPeriodEndDateTime": "2014-08-12T00:00:00Z",
+            "RequestedTotalProcessingDuration": "PT139836499S",
+            "RequestedTotalRequestorDuration": "",
+            "RequestInitialReceiptdatetimecontent": "2014-08-09T17:25:29Z",
+            "RequestInProcessdatetimeContent": "2019-01-14T04:53:48Z",
+            "RequestCloseddatetimeContent": "",
+            "RequestFinisheddatetimeContent": "2019-01-14T04:53:48Z",
+            "FirstReactionDuedatetimeContent": "2014-08-09T20:25:29Z",
+            "CompleteDuedatetimeContent": "2014-08-12T17:25:29Z",
+            "WarrantyStartdatetimeContent": "",
+            "SalesOrganisationID": "",
+            "DivisionCode": "",
+            "DivisionCodeText": "",
+            "DistributionChannelCode": "",
+            "DistributionChannelCodeText": "",
+            "SalesUnitPartyID": "",
+            "ServiceExecutionTeamPartyID": "",
+            "ServiceSupportTeamPartyID": "",
+            "ServicePerformerPartyID": "",
+            "ProcessorPartyID": "",
+            "BuyerPartyID": "10163",
+            "BuyerMainContactPartyID": "1000248",
+            "ReportedForPartyID": "",
+            "InstallationPointID": "",
+            "InstalledBaseID": "",
+            "InstallationPointUUID": null,
+            "WarrantyGoodwillCode": "",
+            "WarrantyGoodwillCodeText": "",
+            "EscalationTimePointDateTime": "",
+            "OnSiteArrivalDueDateTime": "",
+            "OnSiteArrivalDateTime": "",
+            "ServiceSupportTeamPartyName": "",
+            "ResolutionDueDateTime": "",
+            "ResolvedOnDateTime": "2019-01-14T04:53:48Z",
+            "SalesTerritoryID": "",
+            "ResolutionDuetimeZoneCode": "",
+            "ResolutionDuetimeZoneCodeText": "",
+            "EscalationTimePointtimeZoneCode": "",
+            "EscalationTimePointtimeZoneCodeText": "",
+            "OnSiteArrivalDuetimeZoneCode": "",
+            "OnSiteArrivalDuetimeZoneCodeText": "",
+            "RequestInProcessdatetimeZoneCode": "CST",
+            "RequestInProcessdatetimeZoneCodeText": "Central Time (Dallas)",
+            "WarrantyStartdatetimeZoneCode": "",
+            "WarrantyStartdatetimeZoneCodeText": "",
+            "RequestCloseddatetimeZoneCode": "",
+            "RequestCloseddatetimeZoneCodeText": "",
+            "RequestedFulfillmentPeriodStarttimeZoneCode": "UTC",
+            "RequestedFulfillmentPeriodStarttimeZoneCodeText": "UTC+0",
+            "RequestedFulfillmentPeriodEndtimeZoneCode": "UTC",
+            "RequestedFulfillmentPeriodEndtimeZoneCodeText": "UTC+0",
+            "RequestFinisheddatetimeZoneCode": "CST",
+            "RequestFinisheddatetimeZoneCodeText": "Central Time (Dallas)",
+            "FirstReactionDuedatetimeZoneCode": "UTC",
+            "FirstReactionDuedatetimeZoneCodeText": "UTC+0",
+            "ResolvedOntimeZoneCode": "CST",
+            "ResolvedOntimeZoneCodeText": "Central Time (Dallas)",
+            "CompleteDuedatetimeZoneCode": "UTC",
+            "CompleteDuedatetimeZoneCodeText": "UTC+0",
+            "RequestInitialReceiptdatetimeZoneCode": "UTC",
+            "RequestInitialReceiptdatetimeZoneCodeText": "UTC+0",
+            "OnSiteArrivaltimeZoneCode": "",
+            "OnSiteArrivaltimeZoneCodeText": "",
+            "SalesUnitPartyName": "",
+            "ServiceExecutionTeamPartyName": "",
+            "ServicePerformerPartyName": "",
+            "ProcessorPartyName": "",
+            "BuyerPartyName": "Antojos Leon",
+            "BuyerMainContactPartyName": "Fernando Salgueiro",
+            "ReportedForPartyName": "",
+            "ProductDescription": "GS Marengo Womens Mountain Bike",
+            "InstallationPointDescription": "",
+            "InstalledBaseDescription": "",
+            "ServiceTermsServiceIssueName": "",
+            "SalesTerritoryName": "",
+            "BuyerPartyUUID": "00163E03-A070-1ED2-8B9D-AFEA1D26B01D",
+            "ReportedForPartyUUID": null,
+            "BuyerMainContactPartyUUID": "00163E03-A070-1ED2-8B9D-B004EAA1901D",
+            "ProcessorPartyUUID": null,
+            "ServicePerformerPartyUUID": null,
+            "ServiceSupportTeamPartyUUID": null,
+            "ServiceExecutionTeamPartyUUID": null,
+            "SalesUnitPartyUUID": null,
+            "InstalledBaseUUID": null,
+            "WarrantyUUID": null,
+            "SalesTerritoryUUID": null,
+            "WarrantyID": "",
+            "ObjectServiceIssueCategoryID": "",
+            "CauseServiceIssueCategoryID": "",
+            "ActivityServiceIssueCategoryID": "",
+            "MainTicketID": "",
+            "ContractID": "",
+            "ReportedPartyID": "1000248",
+            "ReportedPartyUUID": "00163E03-A070-1ED2-8B9D-B004EAA1901D",
+            "ServiceIssueCategoryID": "",
+            "ServiceRequestClassificationCode": "3",
+            "ServiceRequestClassificationCodeText": "Not Relevant",
+            "CreationDateTime": "/Date(1407605338658)/",
+            "PartnerContactPartyID": "",
+            "PartnerContactPartyUUID": null,
+            "ReportedPartyName": "Fernando Salgueiro",
+            "ChangedByCustomerIndicator": false,
+            "ResponseByProcessorDateTimeContent": "",
+            "ResponseByProcessorDateTimeZoneCode": "",
+            "ResponseByProcessorDateTimeZoneCodeText": "",
+            "ResponseByProcessorDueDateTime": "",
+            "ResponseByProcessorDueDateTimeZoneCode": "UTC",
+            "ResponseByProcessorDueDateTimeZoneCodeText": "UTC+0",
+            "ServiceLevelObjectiveID": "CLOUDFORSERVICE_STANDARD",
+            "ServiceLevelObjectiveName": "Standard Service Level",
+            "ServiceLevelObjectiveNamelanguageCode": "EN",
+            "ServiceLevelObjectiveNamelanguageCodeText": "English",
+            "ResponseByRequesterDateTimeContent": "",
+            "ResponseByRequesterDateTimeZoneCode": "",
+            "ResponseByRequesterDateTimeZoneCodeText": "",
+            "InstallationPointIDV1": "",
+            "LastChangeDateTime": "/Date(1547441629168)/",
+            "CreationIdentityUUID": "00163E03-A070-1EE2-88BA-39EF6D09D0B5",
+            "LastChangeIdentityUUID": "00163E0C-84E2-1ED7-80DF-E5C3286E25C7",
+            "SolutionCategoryName": "",
+            "CauseCategoryName": "",
+            "ObjectCategoryName": "",
+            "IncidentCategoryName": "",
+            "CreatedBy": "Michael Johnes",
+            "LastChangedBy": "Steven Gary",
+            "WarrantyFrom": null,
+            "WarrantyTo": null,
+            "ServiceRequestLifeCycleStatusCode": "3",
+            "ServiceRequestLifeCycleStatusCodeText": "Completed",
+            "RequestAssignmentStatusCode": "2",
+            "RequestAssignmentStatusCodeText": "Requestor Action",
+            "DocumentLanguageCode": "",
+            "DocumentLanguageCodeText": "",
+            "EntityLastChangedOn": "/Date(1547441629168)/",
+            "ETag": "/Date(1547441629168)/",
+            "SalesOrderID": "",
+            "SalesOrderUUID": null,
+            "SalesOrderItemUUID": null,
+            "MaintenancePlanUUID": null,
+            "MaintenancePlanID": "",
+            "MaintenancePlanName": "",
+            "RegisteredPrd": "",
+            "dataloader2_KUT": "",
+            "externalCustomerID": "",
+            "ServiceRequestAttachmentFolder": {
+                "__deferred": {
+                    "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestAttachmentFolder"
+                }
+            },
+            "ServiceRequestBusinessTransactionDocumentReference": {
+                "__deferred": {
+                    "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestBusinessTransactionDocumentReference"
+                }
+            },
+            "ServiceRequestHistoricalVersion": {
+                "__deferred": {
+                    "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestHistoricalVersion"
+                }
+            },
+            "ServiceRequestItem": {
+                "__deferred": {
+                    "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestItem"
+                }
+            },
+            "ServiceRequestOtherParty": {
+                "__deferred": {
+                    "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestOtherParty"
+                }
+            },
+            "ServiceRequestParty": {
+                "__deferred": {
+                    "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestParty"
+                }
+            },
+            "ServiceRequestServicePointLocation": {
+                "__deferred": {
+                    "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestServicePointLocation"
+                }
+            },
+            "ServiceRequestServiceReferenceObject": {
+                "__deferred": {
+                    "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestServiceReferenceObject"
+                }
+            },
+            "ServiceRequestSkillsCollection": {
+                "__deferred": {
+                    "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestSkillsCollection"
+                }
+            },
+            "ServiceRequestSolutionProposal": {
+                "__deferred": {
+                    "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestSolutionProposal"
+                }
+            },
+            "ServiceRequestTextCollection": {
+                "__deferred": {
+                    "uri": "https://sandbox.api.sap.com/sap/c4c/odata/v1/c4codataapi/ServiceRequestCollection('00163E063FDC1ED487FD43C39DFD4BBE')/ServiceRequestTextCollection"
+                }
             }
         }
-    }
+    ]
 }
