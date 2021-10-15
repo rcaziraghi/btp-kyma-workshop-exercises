@@ -30,6 +30,8 @@ spec:
       value: "SENDGRID_API_KEY"
     - name: SENDGRID_SENDER_EMAIL
       value: "SENDGRID_SENDER_EMAIL"
+    - name: SITE
+      value: "electronics"
   source: |-
     const axios = require("axios").default;
     const sgMail = require("@sendgrid/mail");
