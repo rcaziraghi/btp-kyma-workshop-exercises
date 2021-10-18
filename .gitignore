@@ -35,3 +35,37 @@ package-lock.json
 # others
 .DS_Store
 team-extension.log
+
+# CAP business-partners
+_out
+*.db
+connection.properties
+default-*.json
+gen/
+node_modules/
+target/
+
+# Web IDE, App Studio
+.che/
+.gen/
+
+# MTA
+*_mta_build_tmp
+*.mtar
+mta_archives/
+mta.yaml
+
+# Other
+.DS_Store
+*.orig
+*.log
+
+*.iml
+*.flattened-pom.xml
+
+# IDEs
+.vscode
+.idea
+
+# Docker
+docker_commands.txt
