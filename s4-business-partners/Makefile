@@ -1,5 +1,5 @@
 
-DOCKER_ACCOUNT=alebiagi
+DOCKER_ACCOUNT=<your docker account>
 
 build-capimage: ## Build the container without caching
 	docker build --pull --rm -f Dockerfile -t $(DOCKER_ACCOUNT)/caps4bp:latest .

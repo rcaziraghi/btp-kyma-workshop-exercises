@@ -65,7 +65,7 @@
         "kind": "odata",
         "model": "srv/external/API_BUSINESS_PARTNER",
         "credentials": {
-          "destination": "S4HC",
+          "destination": "<your destination name>",
           "path": "/sap/opu/odata/sap/API_BUSINESS_PARTNER"
         }
       }

@@ -1,8 +1,8 @@
 namespace: business-partners
 
-capimage: alebiagi/caps4bp:latest
-uiimage: alebiagi/caps4bpui:latest
-clusterurl: b77cd9f.kyma.shoot.live.k8s-hana.ondemand.com
+capimage: <your docker account>/caps4bp:latest
+uiimage: <your docker account>/caps4bpui:latest
+clusterurl: <your cluster url>
 
-destination: S4HC
+destination: <your destination name>
 updatemode: direct
