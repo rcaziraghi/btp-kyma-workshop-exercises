@@ -60,11 +60,11 @@ spec:
           // const serviceRequestResponse = await getServiceRequest(objectID);
           if (serviceRequestResponse && serviceRequestResponse.data && serviceRequestResponse.data.d.results && serviceRequestResponse.data.d.results.length !== 0 && serviceRequestResponse.data.d.results[0].ID)  {
             const serviceRequestID = serviceRequestResponse.data.d.results[0].ID;
-            const reporterPartyresponse = await getMockReporterParty(objectID);
-            // const reporterPartyresponse = await getReporterParty(objectID);
-            if (reporterPartyresponse && reporterPartyresponse.data && reporterPartyresponse.data.d.results && reporterPartyresponse.data.d.results.length !== 0 && reporterPartyresponse.data.d.results[0].PartyName && reporterPartyresponse.data.d.results[0].Email)  {
-              const name = reporterPartyresponse.data.d.results[0].PartyName;
-              const email = reporterPartyresponse.data.d.results[0].Email;
+            const reporterPartyResponse = await getMockReporterParty(objectID);
+            // const reporterPartyResponse = await getReporterParty(objectID);
+            if (reporterPartyResponse && reporterPartyResponse.data && reporterPartyResponse.data.d.results && reporterPartyResponse.data.d.results.length !== 0 && reporterPartyResponse.data.d.results[0].PartyName && reporterPartyResponse.data.d.results[0].Email)  {
+              const name = reporterPartyResponse.data.d.results[0].PartyName;
+              const email = reporterPartyResponse.data.d.results[0].Email;
               console.log(`Name: ${name}; Email: ${email}`);
               const emailBodyText = `Hello ${name}, This is to confirm that your ticket was created. Thanks, The CX C4C Team` 
               const emailBodyHtml = `Hello ${name},<br><br>This is to confirm that your ticket with ID ${serviceRequestID} was created.<br><br>Thanks,<br>The CX C4C Team` 
