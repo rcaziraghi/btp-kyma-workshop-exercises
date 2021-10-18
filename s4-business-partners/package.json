@@ -1,0 +1,85 @@
+{
+  "name": "business-partners",
+  "version": "1.0.0",
+  "description": "A simple SAP S/4HANA Cloud side-by-side CAP extension to manage business partners.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^5",
+    "@sap/xssec": "^3.2.5",
+    "axios": "^0.21.1",
+    "cloudevents": "^4.0.3",
+    "express": "^4",
+    "moment": "^2.29.1",
+    "passport": "^0.4.1",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "@sap/eslint-plugin-ui5-jsdocs": "^2.0.5",
+    "@sap/ux-specification": "^1.90.8",
+    "@sapui5/ts-types": "^1.92.2",
+    "eslint": "^5.16.0"
+  },
+  "scripts": {
+    "start": "cds run",
+    "watch-business-partners": "cds watch --open business-partners/webapp/index.html#fe-lrop-v4",
+    "undeploy": "cf undeploy business-partners --delete-services --delete-service-keys",
+    "watch-bp-adm": "cds watch --open bp-adm/webapp/index.html#fe-lrop-v4"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "model": "*",
+        "credentials": {
+          "database": ":memory:"
+        }
+      },
+      "API_BUSINESS_PARTNER": {
+        "kind": "odata",
+        "model": "srv/external/API_BUSINESS_PARTNER",
+        "credentials": {
+          "destination": "S4HC",
+          "path": "/sap/opu/odata/sap/API_BUSINESS_PARTNER"
+        }
+      }
+    },
+    "uaa": {
+      "kind": "xsuaa"
+    }
+  },
+  "features": {
+    "fiori_preview": false,
+    "in_memory_db": true
+  },
+  "sapux": [
+    "app/business-partners",
+    "app/bp-adm"
+  ]
+}

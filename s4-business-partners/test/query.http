@@ -1,0 +1,43 @@
+@server = http://localhost:4004
+
+##
+# READ operations
+##
+
+### Service Document
+GET {{server}}/bp-adm
+
+### Service $metadata document
+GET {{server}}/bp-adm/$metadata
+
+### Browsing Business Partners
+GET {{server}}/bp-adm/BusinessPartners?$count=true
+#$select=BusinessPartner,FirstName,LastName
+#&$skiptoken=50
+
+##
+# CREATE and UPDATE operations
+##
+
+### Create New Business Partner
+POST {{server}}/bp-adm/BusinessPartners
+Content-Type: application/json
+
+{ 
+    "BusinessPartner" : "0A000009",
+    "FirstName" : "John",
+    "LastName" : "Doe Test",
+    "BirthDate" : "1970-03-07"
+}
+
+### Update Business Partner
+PATCH  {{server}}/bp-adm/BusinessPartners('0A000009')
+Content-Type: application/json
+
+{ 
+    "FirstName" : "John",
+    "LastName" : "Doe Test - UPD001",
+    "BirthDate" : "1970-03-09"
+}
+
+

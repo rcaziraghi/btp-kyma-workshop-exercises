@@ -1,0 +1,8 @@
+namespace: business-partners
+
+capimage: alebiagi/caps4bp:latest
+uiimage: alebiagi/caps4bpui:latest
+clusterurl: b77cd9f.kyma.shoot.live.k8s-hana.ondemand.com
+
+destination: S4HC
+updatemode: direct

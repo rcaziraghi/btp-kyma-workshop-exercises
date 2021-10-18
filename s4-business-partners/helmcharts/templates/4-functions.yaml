@@ -1,0 +1,288 @@
+
+apiVersion: servicecatalog.kyma-project.io/v1alpha1
+kind: ServiceBindingUsage
+metadata:
+  name: {{ .Release.Name }}-destservicebindingusagefunction
+  namespace: {{.Values.namespace}}
+  labels:
+     name: business-partners
+spec:
+  parameters:
+    envPrefix:
+      name: dest_
+  serviceBindingRef:
+    name: {{ .Release.Name }}-dest-binding
+  usedBy:
+    kind: serverless-function
+    name: {{ .Release.Name }}-updfunc
+
+---
+
+apiVersion: servicecatalog.kyma-project.io/v1alpha1
+kind: ServiceBindingUsage
+metadata:
+  name: {{ .Release.Name }}-xsuaaservicebindingusagefunction
+  namespace: {{.Values.namespace}}
+  labels:
+     name: business-partners
+spec:
+  parameters:
+    envPrefix:
+      name: xsuaa_
+  serviceBindingRef:
+    name: {{ .Release.Name }}-xsuaa-binding
+  usedBy:
+    kind: serverless-function
+    name: {{ .Release.Name }}-updfunc
+
+---
+
+apiVersion: serverless.kyma-project.io/v1alpha1
+kind: Function
+metadata:
+  name: {{ .Release.Name }}-updfunc
+  namespace: {{.Values.namespace}}
+  labels:
+     name: business-partners
+spec:
+  minReplicas: 1
+  maxReplicas: 5
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+  buildResources:
+    requests:
+      cpu: 700m
+      memory: 700Mi
+    limits:
+      cpu: 1100m
+      memory: 1100Mi
+  runtime: nodejs12
+  source: |
+    const { BusinessPartner } = require("@sap/cloud-sdk-vdm-business-partner-service");
+    const moment = require("moment");
+
+    function convert2CDSFormat(businessPartner) {
+        return {
+            BusinessPartner: businessPartner.businessPartner,
+            FirstName: businessPartner.firstName,
+            LastName: businessPartner.lastName,
+            BirthDate: businessPartner.birthDate.format('YYYY-MM-DD').toString(),
+            BusinessPartnerCategory: businessPartner.businessPartnerCategory
+        };
+    }
+
+    module.exports = {
+      main: async function (event, context) {
+        const msg = event.data;
+        const destName = (process.env.destination) ? JSON.parse(process.env.destination).name : "S4HC";
+        const req = BusinessPartner.requestBuilder();
+
+        const businessPartner = BusinessPartner
+          .builder()
+          .businessPartner(msg.entity.BusinessPartner)
+          .firstName(msg.entity.FirstName)
+          .lastName(msg.entity.LastName)
+          .birthDate(moment(msg.entity.BirthDate))
+          .businessPartnerCategory("1")
+          .build();
+
+        let operation;
+
+        switch (msg.method.toUpperCase()) {
+          case "POST": operation = req.create(businessPartner); break;
+          case "PATCH": operation = req.update(businessPartner); break;
+          default: operation = req.create(businessPartner);
+        }
+
+        const bp = await operation.execute({ destinationName: destName });
+        return convert2CDSFormat(bp);
+      }
+    }
+  deps: |
+    {
+      "name": "{{ .Release.Name }}-eventpub",
+      "version": "1.0.0",
+      "dependencies": {
+        "@sap/cloud-sdk-vdm-business-partner-service": "^1.27.0",
+        "moment": "^2.29.1"
+      }
+    }
+  env:
+    - name: destination
+      value: >
+        {
+          "name": "{{.Values.destination}}"
+        }
+    - name: VCAP_SERVICES
+      value: >
+        {
+          "destination": [
+                  {
+                      "label": "destination",
+                      "provider": null,
+                      "plan": "lite",
+                      "name": "{{ .Release.Name }}-destination",
+                      "tags": [
+                          "destination",
+                          "conn",
+                          "connsvc"
+                      ],
+                      "instance_name": "{{ .Release.Name }}-destination",
+                      "binding_name": null,
+                      "credentials": {
+                          "uaadomain": "$(dest_uaadomain)",
+                          "tenantmode": "$(dest_tenantmode)",
+                          "clientid": "$(dest_clientid)",
+                          "instanceid": "$(dest_instanceid)",
+                          "verificationkey": "$(dest_verificationkey)",
+                          "xsappname": "$(dest_xsappname)",
+                          "identityzone": "$(dest_identityzone)",
+                          "clientsecret": "$(dest_clientsecret)",
+                          "tenantid": "$(dest_tenantid)",
+                          "uri": "$(dest_uri)",
+                          "url": "$(dest_url)"
+                      },
+                      "syslog_drain_url": null,
+                      "volume_mounts": []
+                  }
+              ],
+              "xsuaa": [
+                  {
+                    "label": "xsuaa",
+                    "provider": null,
+                    "plan": "application",
+                    "name": "{{ .Release.Name }}-xsuaa",
+                    "tags": [
+                      "xsuaa"
+                    ],
+                    "instance_name": "{{ .Release.Name }}-xsuaa",
+                    "binding_name": null,
+                    "credentials": {
+                      "tenantmode": "$(xsuaa_tenantmode)",
+                      "sburl": "$(xsuaa_sburl)",
+                      "subaccountid": "$(xsuaa_subaccountid)",
+                      "clientid": "$(xsuaa_clientid)",
+                      "xsappname": "$(xsuaa_xsappname)",
+                      "clientsecret": "$(xsuaa_clientsecret)",
+                      "url": "$(xsuaa_url)",
+                      "uaadomain": "$(xsuaa_uaadomain)",
+                      "verificationkey": "$(xsuaa_verificationkey)",
+                      "apiurl": "$(xsuaa_apiurl)",
+                      "identityzone": "$(xsuaa_identityzone)",
+                      "identityzoneid": "$(xsuaa_identityzoneid)",
+                      "tenantid": "$(xsuaa_tenantid)",
+                      "zoneid": "$(xsuaa_zoneid)"
+                    },
+                    "syslog_drain_url": null,
+                    "volume_mounts": []
+                  }
+                ]
+        }
+
+---
+
+apiVersion: gateway.kyma-project.io/v1alpha1
+kind: APIRule
+metadata:
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Release.Name }}-updfunc
+    name: business-partners
+  name: {{ .Release.Name }}-updfunc
+spec:
+  service:
+    host: {{ .Release.Name }}-updfunc.{{ .Values.clusterurl }}
+    name: {{ .Release.Name }}-updfunc
+    port: 80
+  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  rules:
+    - path: /.*
+      methods: ["GET", "PUT", "POST", "HEAD", "PATCH", "DELETE" ]
+      accessStrategies:
+        - handler: allow
+      mutators: []
+
+---
+
+apiVersion: serverless.kyma-project.io/v1alpha1
+kind: Function
+metadata:
+  name: {{ .Release.Name }}-eventpub
+  namespace: {{.Values.namespace}}
+  labels:
+     name: business-partners
+spec:
+  minReplicas: 1
+  maxReplicas: 5
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 200m
+      memory: 256Mi
+  buildResources:
+    requests:
+      cpu: 1100m
+      memory: 1100Mi
+    limits:
+      cpu: 1700m
+      memory: 1700Mi
+  runtime: nodejs12
+  source: |
+    const axios = require('axios').default;
+    const { HTTP, CloudEvent } = require('cloudevents');
+
+    module.exports = {
+      main: function (event, context) {
+        const ce = new CloudEvent({ type: "sap.kyma.custom.nonexistingapp.businesspartner.update.v1", source: "kyma", data: event.data });
+        const message = HTTP.structured(ce);
+
+        const res = axios({
+          method: "post",
+          url: "http://eventing-event-publisher-proxy.kyma-system/publish",
+          data: message.body,
+          headers: message.headers,
+        });
+
+        return res.data;
+      }
+    }
+  deps: |
+    {
+      "name": "{{ .Release.Name }}-eventpub",
+      "version": "1.0.0",
+      "dependencies": {
+        "axios": "^0.21.1",
+        "cloudevents": "^4.0.3",
+        "express": "^4"    
+      }
+    }
+    
+---
+
+apiVersion: gateway.kyma-project.io/v1alpha1
+kind: APIRule
+metadata:
+  namespace: {{ .Values.namespace }}
+  labels:
+    app: {{ .Release.Name }}-eventpub
+    name: business-partners
+  name: {{ .Release.Name }}-eventpub
+spec:
+  service:
+    host: {{ .Release.Name }}-eventpub.{{ .Values.clusterurl }}
+    name: {{ .Release.Name }}-eventpub
+    port: 80
+  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  rules:
+    - path: /.*
+      methods: ["GET", "PUT", "POST", "HEAD", "PATCH", "DELETE" ]
+      accessStrategies:
+        - handler: allow
+      mutators: []

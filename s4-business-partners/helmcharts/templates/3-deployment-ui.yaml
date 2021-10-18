@@ -1,0 +1,94 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-ui-approuter
+  labels:
+    app: {{ .Release.Name }}-ui-approuter
+    name: business-partners
+    version: v1
+  namespace: {{.Values.namespace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-ui-approuter
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-ui-approuter
+        name: business-partners
+        version: v1
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-ui-approuter
+        image: {{.Values.uiimage}}
+        imagePullPolicy: Always
+        resources:
+            limits:
+              memory: 256Mi
+              cpu: "0.1"
+            requests:
+              memory: 256Mi
+              cpu: "0.1"
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: xsuaa-volume
+          mountPath: "/etc/secrets/sapcp/xsuaa/xsuaaInst"
+          readOnly: true
+        env:
+        - name: destinations
+          value: '[ {"name":"business-partners-api", "url":"https://{{ .Release.Name }}-caps4bp.{{ .Values.clusterurl }}","forwardAuthToken": true }]'
+      volumes:
+      - name: xsuaa-volume
+        secret:
+          secretName: {{ .Release.Name }}-xsuaa-binding          
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-ui-approuter
+  namespace: {{.Values.namespace}}
+  labels:
+    name: business-partners
+    app: {{ .Release.Name }}-ui-approuter
+    service: {{ .Release.Name }}-ui-approuter
+spec:
+  ports:
+  - port: 5000
+    name: http
+  selector:
+    app: {{ .Release.Name }}-ui-approuter
+
+---
+
+apiVersion: gateway.kyma-project.io/v1alpha1
+kind: APIRule
+metadata:
+  namespace: {{.Values.namespace}}
+  labels:
+    name: business-partners
+    app: {{ .Release.Name }}-ui-approuter
+  name: {{ .Release.Name }}-ui-approuter
+spec:
+  service:
+    host: {{ .Release.Name }}-ui-approuter
+    name: {{ .Release.Name }}-ui-approuter
+    port: 5000
+  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  rules:
+    - path: /.*
+      methods: ["GET", "PUT", "POST", "HEAD", "PATCH", "DELETE" ]
+      mutators:
+        - config:
+            headers:
+              x-forwarded-host: >-
+                {{ .Release.Name }}-ui-approuter.{{ .Values.clusterurl }}
+              x-forwarded-proto: https
+          handler: header
+      accessStrategies:
+        - handler: noop

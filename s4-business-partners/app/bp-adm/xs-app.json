@@ -1,0 +1,18 @@
+{
+  "welcomeFile": "webapp/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "^/bp-adm/(.*)$",
+      "target": "/bp-adm/$1",
+      "destination": "business-partners-api",
+      "authenticationType": "xsuaa"
+    },
+    {
+      "source": "^/webapp/(.*)$",
+      "target": "$1",
+      "localDir": "webapp",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

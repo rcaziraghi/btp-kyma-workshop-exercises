@@ -1,0 +1,236 @@
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceBinding
+metadata:
+  name: {{ .Release.Name }}-dest-binding
+  namespace: {{.Values.namespace}}
+  labels:
+     name: business-partners
+spec:
+  instanceRef:
+    name: {{ .Release.Name }}-destination
+
+---
+
+apiVersion: servicecatalog.kyma-project.io/v1alpha1
+kind: ServiceBindingUsage
+metadata:
+  name: {{ .Release.Name }}-destservicebindingusage
+  namespace: {{.Values.namespace}}
+  labels:
+     name: business-partners
+spec:
+  parameters:
+    envPrefix:
+      name: dest_
+  serviceBindingRef:
+    name: {{ .Release.Name }}-dest-binding
+  usedBy:
+    kind: deployment
+    name: {{ .Release.Name }}-caps4bp
+
+---
+
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceBinding
+metadata:
+  name: {{ .Release.Name }}-xsuaa-binding
+  namespace: {{.Values.namespace}}
+  labels:
+     name: business-partners
+spec:
+  instanceRef:
+    name: {{ .Release.Name }}-xsuaa
+
+---
+
+apiVersion: servicecatalog.kyma-project.io/v1alpha1
+kind: ServiceBindingUsage
+metadata:
+  name: {{ .Release.Name }}-xsuaaservicebindingusage
+  namespace: {{.Values.namespace}}
+  labels:
+     name: business-partners
+spec:
+  parameters:
+    envPrefix:
+      name: xsuaa_
+  serviceBindingRef:
+    name: {{ .Release.Name }}-xsuaa-binding
+  usedBy:
+    kind: deployment
+    name: {{ .Release.Name }}-caps4bp
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-caps4bp
+  labels:
+    app: {{ .Release.Name }}-caps4bp
+    version: v1
+    name: business-partners
+  namespace: {{.Values.namespace}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-caps4bp
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-caps4bp
+        version: v1
+        name: business-partners
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-caps4bp
+        image: {{.Values.capimage}}
+        imagePullPolicy: Always
+        resources:
+            limits:
+              memory: 256Mi
+              cpu: "0.1"
+            requests:
+              memory: 256Mi
+              cpu: "0.1"
+        ports:
+        - containerPort: 4004
+        env:
+          - name: VCAP_SERVICES
+            value: >
+              {
+                "destination": [
+                        {
+                            "label": "destination",
+                            "provider": null,
+                            "plan": "lite",
+                            "name": "{{ .Release.Name }}-destination",
+                            "tags": [
+                                "destination",
+                                "conn",
+                                "connsvc"
+                            ],
+                            "instance_name": "{{ .Release.Name }}-destination",
+                            "binding_name": null,
+                            "credentials": {
+                                "uaadomain": "$(dest_uaadomain)",
+                                "tenantmode": "$(dest_tenantmode)",
+                                "clientid": "$(dest_clientid)",
+                                "instanceid": "$(dest_instanceid)",
+                                "verificationkey": "$(dest_verificationkey)",
+                                "xsappname": "$(dest_xsappname)",
+                                "identityzone": "$(dest_identityzone)",
+                                "clientsecret": "$(dest_clientsecret)",
+                                "tenantid": "$(dest_tenantid)",
+                                "uri": "$(dest_uri)",
+                                "url": "$(dest_url)"
+                            },
+                            "syslog_drain_url": null,
+                            "volume_mounts": []
+                        }
+                    ],
+                    "xsuaa": [
+                        {
+                          "label": "xsuaa",
+                          "provider": null,
+                          "plan": "application",
+                          "name": "{{ .Release.Name }}-xsuaa",
+                          "tags": [
+                            "xsuaa"
+                          ],
+                          "instance_name": "{{ .Release.Name }}-xsuaa",
+                          "binding_name": null,
+                          "credentials": {
+                            "tenantmode": "$(xsuaa_tenantmode)",
+                            "sburl": "$(xsuaa_sburl)",
+                            "subaccountid": "$(xsuaa_subaccountid)",
+                            "clientid": "$(xsuaa_clientid)",
+                            "xsappname": "$(xsuaa_xsappname)",
+                            "clientsecret": "$(xsuaa_clientsecret)",
+                            "url": "$(xsuaa_url)",
+                            "uaadomain": "$(xsuaa_uaadomain)",
+                            "verificationkey": "$(xsuaa_verificationkey)",
+                            "apiurl": "$(xsuaa_apiurl)",
+                            "identityzone": "$(xsuaa_identityzone)",
+                            "identityzoneid": "$(xsuaa_identityzoneid)",
+                            "tenantid": "$(xsuaa_tenantid)",
+                            "zoneid": "$(xsuaa_zoneid)"
+                          },
+                          "syslog_drain_url": null,
+                          "volume_mounts": []
+                        }
+                      ],
+                      "destinations":[{
+                            "forwardAuthToken" : true,
+                            "name" : "business-partners-api",
+                            "strictSSL" : true,
+                            "url" : "https://{{ .Release.Name }}-caps4bp.{{ .Values.clusterurl }}"
+                      }]
+              }
+          - name: VCAP_APPLICATION
+            value: >
+              {
+                "destinations": [
+                  {
+                    "name": "{{ .Values.destination }}"
+                  },
+                  {
+                    "name": "serverless-function",
+                    "url" : "http://{{ .Release.Name }}-updfunc.{{ .Values.namespace }}.svc.cluster.local"
+                  },
+                  {
+                    "name": "event-in-cluster",
+                    "url": "http://eventing-event-publisher-proxy.kyma-system/publish"
+                  },
+                  {
+                    "name": "event-out-cluster",
+                    "url": "https://{{ .Release.Name }}-eventpub.{{ .Values.clusterurl }}"
+                  }
+                ],
+                "config" : {
+                  "update_mode" : "{{ .Values.updatemode }}"
+                }
+              }
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-caps4bp
+  namespace: {{.Values.namespace}}
+  labels:
+    app: {{ .Release.Name }}-caps4bp
+    service: {{ .Release.Name }}-caps4bp
+    name: business-partners
+spec:
+  ports:
+  - port: 4004
+    name: http
+  selector:
+    app: {{ .Release.Name }}-caps4bp
+
+---
+
+apiVersion: gateway.kyma-project.io/v1alpha1
+kind: APIRule
+metadata:
+  namespace: {{.Values.namespace}}
+  labels:
+    app: {{ .Release.Name }}-caps4bp
+    name: business-partners
+  name: {{ .Release.Name }}-caps4bp
+spec:
+  service:
+    host: {{ .Release.Name }}-caps4bp
+    name: {{ .Release.Name }}-caps4bp
+    port: 4004
+  gateway: kyma-gateway.kyma-system.svc.cluster.local
+  rules:
+    - path: /.*
+      methods: ["GET", "PUT", "POST", "HEAD", "PATCH", "DELETE" ]
+      accessStrategies:
+        - handler: noop
+      mutators: []
