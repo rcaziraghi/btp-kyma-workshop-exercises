@@ -29,7 +29,7 @@ module.exports = cds.service.impl(async function () {
     var firstRead = true;
 
     /***
-    * CREATE handlers for 'BusinessPartners' entity
+    * READ handler for 'BusinessPartners' entity
     ***/
     this.before('READ', BusinessPartners, async (req) => {
         // This handler has been implemented to populate the SQLite in-memory DB at first read operation 
@@ -125,7 +125,7 @@ module.exports = cds.service.impl(async function () {
             const res = await createOrUpdateBusinessPartner(req);
             return res;
         } catch (err) {
-            // On error (BP not created in S/4HANA) we need to rollback the transaction
+            // On error (BP not updated in S/4HANA) we need to rollback the transaction
             // in the in-memory db
             cds.tx(req).rollback();
             req.error(err.code, err.message);
