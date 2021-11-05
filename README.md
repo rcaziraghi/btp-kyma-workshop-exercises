@@ -4,7 +4,7 @@
 
 ### Folders:
 
-- **kyma-eventing** - hands-on exercise for the **advanced session**
+- [**kyma-eventing**](https://docs.docker.com/get-docker/) - hands-on exercise for the **advanced session**
 - **cx-c4c-ticket-event-handler** - hands-on exercise for the **CX extensibility** session (extending **C4C**)
 - **cx-commerce-order-event-handler** - hands-on exercise for the **CX extensibility** session (extending **Commerce Cloud**)
 - **s4-business-partners** - hands-on exercise for the **S/4HANA Cloud extensibility** session
