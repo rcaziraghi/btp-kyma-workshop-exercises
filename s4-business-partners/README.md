@@ -8,4 +8,4 @@ Simple <b>Business Partner Management</b> application to read, create and update
 
 ## Pre-requisites, build and deployment steps
 
-Everything that is required to build and deploy the exercise is fully detailed in the [**instructions PDF document**](/Exercise_instructions.pdf) inclued in this folder.
+Everything that is required to build and deploy the exercise is fully detailed in the [**instructions PDF document**](./Exercise_instructions.pdf) inclued in this folder.
