@@ -26,9 +26,9 @@ spec:
       memory: 16Mi
   env:
     - name: SENDGRID_API_KEY
-      value: "SENDGRID_API_KEY"
+      value: "vA2kyikFSLGsdpzCnY0YFQ"
     - name: SENDGRID_SENDER_EMAIL
-      value: "SENDGRID_SENDER_EMAIL"
+      value: "pMrxyDq3zSPp4Mx7TSRoUZ4jUq0r_CDNkHQ4yd56d1A"
   source: |-
     const sgMail = require("@sendgrid/mail");
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
