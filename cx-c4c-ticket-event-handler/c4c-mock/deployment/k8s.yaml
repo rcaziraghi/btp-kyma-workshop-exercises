@@ -19,7 +19,7 @@ spec:
         app: c4c-mock
     spec:
       containers:
-      - image: docker.io/<docker-username>/c4c-mock:latest
+      - image: docker.io/rcaziraghi/c4c-mock:latest
         imagePullPolicy: Always
         name: c4c-mock
         ports:

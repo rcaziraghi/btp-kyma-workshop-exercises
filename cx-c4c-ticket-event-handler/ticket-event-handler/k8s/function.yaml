@@ -27,11 +27,11 @@ spec:
       memory: 16Mi
   env:
     - name: SENDGRID_API_KEY
-      value: "SENDGRID_API_KEY"
+      value: "vA2kyikFSLGsdpzCnY0YFQ"
     - name: SENDGRID_SENDER_EMAIL
-      value: "SENDGRID_SENDER_EMAIL"
+      value: "pMrxyDq3zSPp4Mx7TSRoUZ4jUq0r_CDNkHQ4yd56d1A"
     - name: SAP_C4C_API_KEY
-      value: "SAP_C4C_API_KEY"
+      value: "AjMKyfE8jnWaDZTMRjWQzXHbxDhZ45Pm"
   source: |-
     const axios = require("axios").default;
     const sgMail = require("@sendgrid/mail");
