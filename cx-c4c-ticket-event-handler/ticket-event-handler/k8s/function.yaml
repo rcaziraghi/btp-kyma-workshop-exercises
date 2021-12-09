@@ -27,9 +27,9 @@ spec:
       memory: 16Mi
   env:
     - name: SENDGRID_API_KEY
-      value: "vA2kyikFSLGsdpzCnY0YFQ"
+      value: "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"
     - name: SENDGRID_SENDER_EMAIL
-      value: "pMrxyDq3zSPp4Mx7TSRoUZ4jUq0r_CDNkHQ4yd56d1A"
+      value: "rafael@caziraghi.com.br"
     - name: SAP_C4C_API_KEY
       value: "AjMKyfE8jnWaDZTMRjWQzXHbxDhZ45Pm"
   source: |-
